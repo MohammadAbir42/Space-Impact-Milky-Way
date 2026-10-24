@@ -1,10 +1,10 @@
-
 using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
     [SerializeField] private float speed = 25f;
     [SerializeField] private float lifetime = 2f;
+    [SerializeField] private int damage = 1;
     
     public void Initialize(float bulletSpeed)
     {
@@ -26,6 +26,12 @@ public class BulletController : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             return; // Ignore collision with the player
+        }
+        
+        if (collision.TryGetComponent<EnemyHealth>(out EnemyHealth enemyHealth))
+        {
+           enemyHealth.TakeDamage(damage);
+            Destroy(gameObject);
         }
     }
 }

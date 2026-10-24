@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     
     private float fireCooldown = 0f; // Time when the player can fire again
     
+    // private Vector2 velocity;
+    
     private Camera mainCamera;
     
     public GameObject bullet;
@@ -37,7 +39,6 @@ public class PlayerController : MonoBehaviour
         ClampToScreen();
     }
     
-    
     void OnEnable()
     {
         moveInput.action.Enable();
@@ -55,9 +56,9 @@ public class PlayerController : MonoBehaviour
         Vector2 input = moveInput.action.ReadValue<Vector2>();
         
         Vector3 movement = new Vector3(input.x, input.y, 0f);
-        
-        movement = Vector3.ClampMagnitude(movement, 1.0f);
-        
+
+        movement = Vector3.ClampMagnitude(movement, 1f);
+
         transform.position += movement * speed * Time.deltaTime;
     }
     
